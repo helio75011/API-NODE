@@ -1,7 +1,9 @@
 const express = require('express');
 const { MongoClient } = require('mongodb');
+const sneakersController = require('./controllers/sneakers');
 
 const app = express();
+app.use(express.json());
 const port = 3000;
 
 
@@ -21,9 +23,7 @@ async function connectToMongo() {
     }
 }
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
+app.post('/sneakers', sneakersController.createSneacker);
 
 app.listen(port, () => {
     console.log(`Serveur démarré sur http://localhost:${port}`);
